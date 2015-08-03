@@ -1,15 +1,13 @@
-require_relative "connect_four/version"
-require_relative "connect_four/checker"
-require_relative "connect_four/player"
-require_relative "connect_four/board"
-require_relative "connect_four/game"
-require_relative "connect_four/exceptions"
+require_relative 'connect_four/version'
+require_relative 'connect_four/checker'
+require_relative 'connect_four/player'
+require_relative 'connect_four/board'
+require_relative 'connect_four/game'
+require_relative 'connect_four/exceptions'
 
 require 'colorize'
 
 module ConnectFour
-
-
   def self::welcome
     puts "\nWelcome to Command Line Connect Four!"
     printf 'Player 1 name: '
@@ -31,7 +29,7 @@ module ConnectFour
     begin
       printf "#{player.name.to_s.colorize(player.checker.color)}, choose a column: "
       column = gets.chomp.to_i
-    fail InvalidColumnError unless (1..7).include? column
+      fail InvalidColumnError unless (1..7).include? column
     rescue StandardError => error
       puts error.message
       retry
@@ -39,14 +37,14 @@ module ConnectFour
     column
   end
 
-  def self::start(players = ConnectFour::welcome)
+  def self::start(players = ConnectFour.welcome)
     game = Game.new(players)
     turn = 0
     until game.over?
       game.board.draw
       player = game.players[turn % 2]
       begin
-        column = ConnectFour::get_choice(player)
+        column = ConnectFour.get_choice(player)
         game.play(player, column)
       rescue StandardError => error
         puts error.message
@@ -62,6 +60,6 @@ module ConnectFour
       puts "\nIt's a Draw!"
     end
     printf 'Play Again? y/n: '
-    ConnectFour::start players if gets.chomp.downcase == 'y'
+    ConnectFour.start players if gets.chomp.downcase == 'y'
   end
 end

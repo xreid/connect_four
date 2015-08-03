@@ -19,7 +19,7 @@ module ConnectFour
     def draw
       puts "\n"
       @spaces.each do |row|
-        row.each { |checker| print checker }#== BLANK_SPACE ? checker : BLANK_SPACE.colorize(checker) }
+        row.each { |checker| print checker }
         puts "\n"
       end
       puts "1 2 3 4 5 6 7\n"
@@ -58,9 +58,9 @@ module ConnectFour
 
     def check(scope)
       case scope
-        when :rows      then scope = rows
-        when :columns   then scope = columns
-        when :diagonals then scope = diagonals
+      when :rows      then scope = rows
+      when :columns   then scope = columns
+      when :diagonals then scope = diagonals
       end
       checkers = []
       scope.each do |segment|
